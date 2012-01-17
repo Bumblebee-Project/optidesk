@@ -19,7 +19,11 @@
  */
 
 #include <stdio.h>
+#include <gio/gio.h>
 
 int main(int argc, char* argv[]) {
+    if (argc != 3) {
+        printf("Usage: optidesk <source> <destination>\n");
+    }
     return 0;
 }
