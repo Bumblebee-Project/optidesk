@@ -1,3 +1,11 @@
 *.o
 *.swp
 *.desktop
+Makefile*
+
+/.deps/
+/bin/
+/build-aux/
+config*
+aclocal.m4
+autom4te.cache
