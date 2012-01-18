@@ -22,4 +22,5 @@ AC_SUBST([regular_CFLAGS])
 
 # Checks for header files.
 PKG_CHECK_MODULES([glib], [glib-2.0])
+PKG_CHECK_MODULES([gio], [gio-2.0])
 AC_OUTPUT
