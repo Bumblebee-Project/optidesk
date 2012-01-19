@@ -50,6 +50,9 @@ static void print_help(int exit_val) {
 
 
 int main(int argc, char* argv[]) {
+
+    int exit_flag = EXIT_SUCCESS;
+
     // Parse the options
     char* short_opts= "Vh";
     struct option long_opts[] = {
@@ -85,6 +88,30 @@ int main(int argc, char* argv[]) {
         printf("Too many arguments\n");
         printf("expected: 2\ngot: %d\n", argc - optind);
         exit(EXIT_FAILURE);
+    } else {
+        g_type_init();
+        GFile *source;
+        GFile* destination;
+        source = g_file_new_for_commandline_arg(argv[optind]);
+        destination = g_file_new_for_commandline_arg(argv[optind+1]);
+        GError* file_err = NULL;
+        GFileCopyFlags copy_flags = G_FILE_COPY_NONE;
+        if (g_file_copy(
+                source,
+                destination,
+                copy_flags,
+                NULL,
+                NULL,
+                NULL,
+                &file_err)) {
+            printf("File copy success\n");
+        } else {
+            printf("(Implement) An error occurred.");
+            exit_flag = EXIT_FAILURE;
+        }
+        // Free allocated memory
+        g_object_unref(source);
+        g_object_unref(destination);
     }
-    return 0;
+    return exit_flag;
 }
